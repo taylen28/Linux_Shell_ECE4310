@@ -1,0 +1,72 @@
+[4mfgetc[24m(3)                                       Library Functions Manual                                       [4mfgetc[24m(3)
+
+[1mNAME[0m
+       fgetc, fgets, getc, getchar, ungetc - input of characters and strings
+
+[1mLIBRARY[0m
+       Standard C library ([4mlibc[24m, [4m-lc[24m)
+
+[1mSYNOPSIS[0m
+       [1m#include <stdio.h>[0m
+
+       [1mint fgetc(FILE *[4m[22mstream[24m[1m);[0m
+       [1mint getc(FILE *[4m[22mstream[24m[1m);[0m
+       [1mint getchar(void);[0m
+
+       [1mchar *fgets(char [4m[22ms[24m[1m[restrict .[4m[22msize[24m[1m], int [4m[22msize[24m[1m, FILE *restrict [4m[22mstream[24m[1m);[0m
+
+       [1mint ungetc(int [4m[22mc[24m[1m, FILE *[4m[22mstream[24m[1m);[0m
+
+[1mDESCRIPTION[0m
+       [1mfgetc[22m()  reads  the next character from [4mstream[24m and returns it as an [4munsigned[24m [4mchar[24m cast to an [4mint[24m, or [1mEOF [22mon end
+       of file or error.
+
+       [1mgetc[22m() is equivalent to [1mfgetc[22m() except that it may be implemented as a macro which evaluates [4mstream[24m  more  than
+       once.
+
+       [1mgetchar[22m() is equivalent to [1mgetc([4m[22mstdin[24m[1m)[22m.
+
+       [1mfgets[22m()  reads  in at most one less than [4msize[24m characters from [4mstream[24m and stores them into the buffer pointed to
+       by [4ms[24m.  Reading stops after an [1mEOF [22mor a newline.  If a newline is read, it is stored into the buffer.  A  termi‐
+       nating null byte ('\0') is stored after the last character in the buffer.
+
+       [1mungetc[22m()  pushes [4mc[24m back to [4mstream[24m, cast to [4munsigned[24m [4mchar[24m, where it is available for subsequent read operations.
+       Pushed-back characters will be returned in reverse order; only one pushback is guaranteed.
+
+       Calls to the functions described here can be mixed with each other and with calls to other input functions from
+       the [4mstdio[24m library for the same input stream.
+
+       For nonlocking counterparts, see [1munlocked_stdio[22m(3).
+
+[1mRETURN VALUE[0m
+       [1mfgetc[22m(), [1mgetc[22m(), and [1mgetchar[22m() return the character read as an [4munsigned[24m [4mchar[24m cast to an [4mint[24m or [1mEOF  [22mon  end  of
+       file or error.
+
+       [1mfgets[22m() returns [4ms[24m on success, and NULL on error or when end of file occurs while no characters have been read.
+
+       [1mungetc[22m() returns [4mc[24m on success, or [1mEOF [22mon error.
+
+[1mATTRIBUTES[0m
+       For an explanation of the terms used in this section, see [1mattributes[22m(7).
+       ┌───────────────────────────────────────────────────────────────────────────────────┬───────────────┬─────────┐
+       │ [1mInterface                                                                         [22m│ [1mAttribute     [22m│ [1mValue   [22m│
+       ├───────────────────────────────────────────────────────────────────────────────────┼───────────────┼─────────┤
+       │ [1mfgetc[22m(), [1mfgets[22m(), [1mgetc[22m(), [1mgetchar[22m(), [1mungetc[22m()                                     │ Thread safety │ MT-Safe │
+       └───────────────────────────────────────────────────────────────────────────────────┴───────────────┴─────────┘
+
+[1mSTANDARDS[0m
+       C11, POSIX.1-2008.
+
+[1mHISTORY[0m
+       POSIX.1-2001, C89.
+
+[1mNOTES[0m
+       It  is not advisable to mix calls to input functions from the [4mstdio[24m library with low-level calls to [1mread[22m(2) for
+       the file descriptor associated with the input stream; the results will be undefined and very probably not  what
+       you want.
+
+[1mSEE ALSO[0m
+       [1mread[22m(2),  [1mwrite[22m(2),  [1mferror[22m(3),  [1mfgetwc[22m(3),  [1mfgetws[22m(3),  [1mfopen[22m(3),  [1mfread[22m(3),  [1mfseek[22m(3),  [1mgetline[22m(3),  [1mgets[22m(3),
+       [1mgetwchar[22m(3), [1mputs[22m(3), [1mscanf[22m(3), [1mungetwc[22m(3), [1munlocked_stdio[22m(3), [1mfeature_test_macros[22m(7)
+
+Linux man-pages 6.7                                   2023-10-31                                              [4mfgetc[24m(3)

@@ -17,7 +17,6 @@ int main()
 
     printf("\n\nSTART\n");
     printf("\n\n");
-
     //create a child process using fork() system call
     fork_pid = fork();
     switch(fork_pid)
