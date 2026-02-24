@@ -2,6 +2,7 @@
 #include <unistd.h> //needed for fork, execv, _exit
 #include <sys/wait.h> //needed for wait and waitpid
 #include <string.h> //needed for all the string functions
+#include <stdlib.h> //needed for atoi
 
 /* FUNCTIONS USED
 fgets: reads the line of text that we type in
