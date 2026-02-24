@@ -1,3 +1,7 @@
+/* This program is a simple linux shell that runs commands in the /usr/bin directory
+    By Taylen, Andrew, and Joshua
+    2 extra commands were added "exit" and "add"
+*/
 #include <stdio.h> //needed for printf, fgets, stdin
 #include <unistd.h> //needed for fork, execv, _exit
 #include <sys/wait.h> //needed for wait and waitpid
@@ -34,8 +38,8 @@ int main()
         
     //input logic
         int i = 0;
-        args[i] = strtok(line," "); //gets the first token
-        if (args[0] == NULL) {
+        args[i] = strtok(line," "); //gets the first token seperates it by finding spaces " "
+        if (args[0] == NULL) { 
             continue; //allows shell to keep making a new "input line" if enter keeps getting hit
         }
         while(args[i] != NULL) //keeps going until the null pointer token from the last strtok is reached
@@ -51,7 +55,7 @@ int main()
         */
         
         //exit command if "exit" is typed
-        if(strcmp(args[0], "exit") == 0) //strcmp compares the input with "exit" to break out of shell
+        if(strcmp(args[0], "exit") == 0) //strcmp compares the input with "exit" to break out of shell 0 means they are the same
         {
             break;
         }
@@ -66,6 +70,7 @@ int main()
             printf("%d\n", atoi(args[1]) + atoi(args[2])); //adds numbers together
             continue;
         }
+
 
     //Execution
         pid_t pid = fork(); //returns 0 in child, child PID in parent, -1 on error
