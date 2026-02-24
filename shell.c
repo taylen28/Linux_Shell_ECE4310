@@ -20,6 +20,7 @@ int main()
     char *args[10]; //array of argument pointers, used in execv
 
     //input
+    printf("to add 2 numbers, type in [add x y]\n");
     while(1)
     {
         printf("Shell > "); //input line
@@ -54,7 +55,16 @@ int main()
             break;
         }
     
+    //adding numbers custom command
+        if (strcmp(args[0], "add") == 0) { //checks to see if "add" was typed
+            if (args[1] == NULL || args[2] == NULL) { //checks if an invalid input like a space was given
+                printf("wrong format entered: enter add x y (ex. add 1 2)\n");
+                continue;
+            }
 
+            printf("%d\n", atoi(args[1]) + atoi(args[2])); //adds numbers together
+            continue;
+        }
 
     //Execution
         pid_t pid = fork(); //returns 0 in child, child PID in parent, -1 on error
